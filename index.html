@@ -8,7 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-
+<meta name="googlebot" content="index,follow">
+<meta name="bingbot" content="index,follow">
 
 <meta name="google-site-verification" content="ISI_NANTI_DARI_GOOGLE">
 
@@ -61,7 +62,7 @@
 
 <script type="application/ld+json">
 {
-"@context":"https://github.com",
+"@context":"https://schema.org",
 "@type":"TravelAgency",
 "name":"Elfathan Travel",
 "url":"https://elfathan-travel.web.id",
@@ -131,7 +132,7 @@
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div class="max-w-3xl">
                 <h1 class="text-4xl md:text-6xl font-black leading-tight mb-6 italic tracking-tight uppercase">
-                    Solusi Transportasi & <span class="text-rose-600">Ekspedisi Terpercaya!</span
+                    Solusi Transportasi & <span class="text-rose-600">Ekspedisi Terpercaya!</span>
                 </h1>
 <p class="text-lg md:text-2xl text-gray-300 mb-10 max-w-2xl">
                 Cepat, Aman, dan Nyaman. Perjalanan antar kabupaten kini lebih tenang karena keselamatan dan kenyamanan Anda adalah prioritas utama kami.
@@ -348,8 +349,11 @@ class="p-4 rounded-lg bg-black border border-white/10">
 <input placeholder="Rute / Alamat Tujuan"
 class="p-4 rounded-lg bg-black border border-white/10">
 
-<input placeholder="HH/BB/TTTT"
-<input type="date"
+<input 
+type="text"
+placeholder="DD/MM/YYYY"
+onfocus="(this.type='date')"
+onblur="if(!this.value)this.type='text'"
 class="p-4 rounded-lg bg-black border border-white/10">
 
 <input type="number" placeholder="Jumlah Penumpang / Jumlah Barang"
