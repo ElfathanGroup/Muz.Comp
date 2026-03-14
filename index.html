@@ -356,9 +356,16 @@ onfocus="(this.type='date')"
 onblur="if(!this.value)this.type='text'"
 class="p-4 rounded-lg bg-black border border-white/10">
 
-<input type="number" placeholder="Jumlah Penumpang / Jumlah Barang"
+<input type="number" placeholder="Jumlah Penumpang / Barang"
 class="p-4 rounded-lg bg-black border border-white/10">
 
+<textarea 
+name="keterangan"
+placeholder="Keterangan / Request tambahan (contoh: jemput di depan minimarket, bawa 2 koper, dll)"
+rows="3"
+class="p-4 rounded-lg bg-black border border-white/10 md:col-span-2">
+</textarea>
+    
 <button type="submit"
 class="bg-rose-600 hover:bg-rose-700 p-4 rounded-lg font-bold md:col-span-2">
 Kirim Booking via WhatsApp
@@ -540,7 +547,7 @@ let nama = inputs[0].value;
 let rute = inputs[1].value;
 let tanggalRaw = inputs[2].value;
 let jumlah = inputs[3].value;
-
+let keterangan = this.querySelector("[name=keterangan]").value;
 let tanggal = "";
 
 if(tanggalRaw){
