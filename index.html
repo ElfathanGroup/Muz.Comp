@@ -99,7 +99,7 @@
                 </div>
 
                 <div class="hidden md:flex space-x-8 text-xs font-bold tracking-widest">
-                    <a href="#home" class="hover:text-rose-600 transition">HOME</a>
+                    <a href="#home" class="hover:text-rose-600 transition">HOsME</a>
                     <a href="#rute" class="hover:text-rose-600 transition">RUTE</a>
                     <a href="#keunggulan" class="hover:text-brand-red transition">KEUNGGULAN</a>
                     <a href="#about" class="hover:text-rose-600 transition">TENTANG</a>
@@ -336,24 +336,27 @@ Booking Travel Online
 
 <form id="bookingForm" class="grid md:grid-cols-2 gap-6">
 
+<select required class="p-4 rounded-lg bg-black border border-white/10">
+<option value="">Pilih Layanan</option>
+<option value="Penumpang">Penumpang</option>
+<option value="Kirim Barang">Kirim Barang</option>
+</select>
+
 <input required placeholder="Nama"
 class="p-4 rounded-lg bg-black border border-white/10">
 
-<input required placeholder="Penumpang/Barang"
+<input placeholder="Rute / Alamat Tujuan"
 class="p-4 rounded-lg bg-black border border-white/10">
 
-<input placeholder="Rute (Contoh: Makassar - Palopo)"
-class="p-4 rounded-lg bg-black border border-white/10">
-
-<input placeholder="Tanggal"
 <input type="date"
 class="p-4 rounded-lg bg-black border border-white/10">
 
-<input type="number" placeholder="Jumlah Penumpang/Barang"
+<input type="number" placeholder="Jumlah Penumpang / Jumlah Barang"
 class="p-4 rounded-lg bg-black border border-white/10">
 
-<button class="bg-rose-600 hover:bg-rose-700 p-4 rounded-lg font-bold">
-Booking
+<button type="submit"
+class="bg-rose-600 hover:bg-rose-700 p-4 rounded-lg font-bold md:col-span-2">
+Kirim Booking via WhatsApp
 </button>
 
 </form>
@@ -520,33 +523,44 @@ class="fixed bottom-12 right-6 bg-green-500 hover:bg-green-600 text-white p-4 ro
 </a>
 
 <script>
+
 document.getElementById("bookingForm").addEventListener("submit", function(e){
 
 e.preventDefault();
 
+let layanan = this.querySelector("select").value;
 let inputs = this.querySelectorAll("input");
 
 let nama = inputs[0].value;
-let wa = inputs[1].value;
-let rute = inputs[2].value;
-let tanggal = inputs[3].value;
-let jumlah = inputs[4].value;
+let rute = inputs[1].value;
+let tanggalRaw = inputs[2].value;
+let jumlah = inputs[3].value;
 
-let pesan =
-`Halo Elfathan Travel
-Saya ingin booking travel.
+let tanggal = "";
 
-Nama: ${nama}
-No WA: ${wa}
-Rute: ${rute}
-Tanggal: ${tanggal}
-Jumlah Penumpang: ${jumlah}`;
+if(tanggalRaw){
+let parts = tanggalRaw.split("-");
+tanggal = parts[2] + "/" + parts[1] + "/" + parts[0];
+}
+
+let pesan = `Halo Elfathan Travel,
+
+Saya ingin melakukan pemesanan.
+
+Jenis Layanan : ${layanan}
+Nama : ${nama}
+Rute / Tujuan : ${rute}
+Tanggal : ${tanggal}
+Jumlah : ${jumlah}
+
+Mohon informasi lebih lanjut.`;
 
 let url = "https://wa.me/6285330000882?text=" + encodeURIComponent(pesan);
 
 window.open(url, "_blank");
 
 });
+
 </script>
 
 
