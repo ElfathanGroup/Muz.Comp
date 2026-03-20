@@ -103,7 +103,7 @@
                     <a href="#rute" class="hover:text-rose-600 transition">RUTE</a>
                     <a href="#keunggulan" class="hover:text-brand-red transition">KEUNGGULAN</a>
                     <a href="#about" class="hover:text-rose-600 transition">TENTANG</a>
-                    <a href="#foto" class="hover:text-rose-600 transition">GALERI</a>
+                    <a href="#foto" class="hover:text-rose-600 transition">GALErRI</a>
                     <a href="#layanan" class="hover:text-rose-600 transition">LAYANAN</a>
                 </div>
                 <a href="#booking" class="text-white bg-rose-600 hover:bg-rose-700 px-6 py-2 rounded-full text-[10px] font-black transition-transform hover:scale-105 shadow-[0_0_15px_rgba(225,29,72,0.4)]">PESAN SEKARANG</a>
@@ -357,11 +357,11 @@ onblur="if(!this.value)this.type='text'"
 class="p-4 rounded-lg bg-black border border-white/10">
 
 
-<input id="jumlah" type="number" placeholder="Jumlah Penumpang"
+<input id="jumlah" type="number" placeholder="Jumlah"
 class="p-4 rounded-lg bg-black border border-white/10">
 
 
-<input id="keterangan" placeholder="Keterangan / Request Tambahan"
+<input id="keterangan" placeholder="Keterangan"
 class="p-4 rounded-lg bg-black border border-white/10">
     
 <button type="submit"
@@ -577,28 +577,14 @@ window.open(url, "_blank");
 
 </script>
 
-<script>
-const layanan = document.getElementById("layanan");
-const jumlah = document.getElementById("jumlah");
-const keterangan = document.getElementById("keterangan");
-
-layanan.addEventListener("change", function(){
-
-    if(this.value === "Penumpang"){
-        jumlah.placeholder = "Jumlah Penumpang";
-        keterangan.placeholder = "Keterangan / Request Tambahan";
-    }
-
-    else if(this.value === "Kirim Barang"){
-        jumlah.placeholder = "Jumlah Barang";
-        keterangan.placeholder = "Jenis Barang (Tas, Ayam, dll)";
-    }
-
-});
-</script>
+}
+        else {
+            jumlah.placeholder = "Jumlah";
+            keterangan.placeholder = "Keterangan";
+        }
 
 <script>
-
+layanan.dispatchEvent(new Event("change"));
 document.querySelectorAll("img").forEach(img => {
 
 img.addEventListener("click", function(){
