@@ -103,7 +103,7 @@
                     <a href="#rute" class="hover:text-rose-600 transition">RUTE</a>
                     <a href="#keunggulan" class="hover:text-brand-red transition">KEUNGGULAN</a>
                     <a href="#about" class="hover:text-rose-600 transition">TENTANG</a>
-                    <a href="#foto" class="hover:text-rose-600 transition">GALERI</a>
+                    <a href="#foto" class="hover:text-rose-600 transition">GALERIi</a>
                     <a href="#layanan" class="hover:text-rose-600 transition">LAYANAN</a>
                 </div>
                 <a href="#booking" class="text-white bg-rose-600 hover:bg-rose-700 px-6 py-2 rounded-full text-[10px] font-black transition-transform hover:scale-105 shadow-[0_0_15px_rgba(225,29,72,0.4)]">PESAN SEKARANG</a>
@@ -624,27 +624,27 @@ let navLinks = document.querySelectorAll("nav a");
 
 window.addEventListener("scroll", () => {
 
-let top = window.scrollY;
+    let top = window.scrollY;
 
-sections.forEach(sec => {
+    sections.forEach(sec => {
 
-let offset = sec.offsetTop - 150;
-let height = sec.offsetHeight;
-let id = sec.getAttribute("id");
+        let offset = sec.offsetTop - 150;
+        let height = sec.offsetHeight;
+        let id = sec.getAttribute("id");
 
-if(top >= offset && top < offset + height){
+        if(top >= offset && top < offset + height){
 
-navLinks.forEach(link => {
-link.classList.remove("text-rose-600");
-});
+            navLinks.forEach(link => {
+                link.classList.remove("text-rose-600");
+            });
 
-document.querySelector('nav a[href*="' + id + '"]')?.classList.add("text-rose-600");
+            document.querySelector('nav a[href*="' + id + '"]')?.classList.add("text-rose-600");
 
-}
+        }
 
-});
+    });
 
-};
+}); // ← INI WAJIB
 
 </script>
 
