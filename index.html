@@ -106,7 +106,7 @@
                     <a href="#foto" class="hover:text-rose-600 transition">GALERIi</a>
                     <a href="#layanan" class="hover:text-rose-600 transition">LAYANAN</a>
                 </div>
-                <a href="#booking" class="text-white bg-rose-600 hover:bg-rose-700 px-6 py-2 rounded-full text-[10px] font-black transition-transform hover:scale-105 shadow-[0_0_15px_rgba(225,29,72,0.4)]">PESAN SEKARANG</a>
+                <a href="#" class="text-white bg-rose-600 hover:bg-rose-700 px-6 py-2 rounded-full text-[10px] font-black transition-transform hover:scale-105 shadow-[0_0_15px_rgba(225,29,72,0.4)]">PESAN SEKARANG</a>
             </div>
         </div>
     </nav>
@@ -136,7 +136,7 @@
 <p class="text-lg md:text-2xl text-gray-300 mb-10 max-w-2xl">
                 Cepat, Aman, dan Nyaman. Perjalanan antar kabupaten kini lebih tenang karena keselamatan dan kenyamanan Anda adalah prioritas utama kami.
             </p>
-                <a href="#booking" class="inline-flex items-center gap-4 bg-rose-600 hover:bg-rose-700 text-white px-8 py-5 rounded-lg font-bold text-lg transition-all hover:translate-x-2">
+                <a href="#" class="inline-flex items-center gap-4 bg-rose-600 hover:bg-rose-700 text-white px-8 py-5 rounded-lg font-bold text-lg transition-all hover:translate-x-2">
                     👉 [Klik Di Sini: Pesan Tiket & Kirim Paket Via WhatsApp]
                 </a>
             </div>
@@ -327,7 +327,7 @@ Galeri <span class="text-rose-600">Elfathan Travel</span>
 </section>
 
 
-<section id="booking" class="py-24 bg-zinc-950">
+<section id="" class="py-24 bg-zinc-950">
 <div class="max-w-5xl mx-auto px-4">
 
 <h2 class="text-4xl font-black text-center mb-12">
@@ -337,35 +337,31 @@ Booking Travel Online
 <form id="bookingForm" class="grid md:grid-cols-2 gap-6">
 
 <select id="layanan" required class="p-4 rounded-lg bg-black border border-white/10">
-<option value="" disabled selected>Pilih Layanan</option>
+<option value="">Pilih Layanan</option>
 <option value="penumpang">Penumpang</option>
 <option value="barang">Kirim Barang</option>
 </select>
 
-<input id="nama" placeholder="Nama"
-class="p-4 rounded-lg bg-black border border-white/10">
+<input id="nama" placeholder="Nama" required class="p-4 rounded-lg bg-black border border-white/10">
 
-<input id="rute" placeholder="Rute / Alamat Tujuan"
-class="p-4 rounded-lg bg-black border border-white/10">
+<input id="rute" placeholder="Rute (Cth :Mks - Palu)" required class="p-4 rounded-lg bg-black border border-white/10">
 
 <input 
 id="tanggal"
 type="text"
 placeholder="DD/MM/YYYY"
-onfocus="(this.type='date')"
-onblur="if(!this.value)this.type='text'"
-class="p-4 rounded-lg bg-black border border-white/10">
+onfocus="this.type='date'"
+onblur="if(!this.value)this.type='text'" required class="p-4 rounded-lg bg-black border border-white/10">
 
 
-<input id="jumlah" type="number" placeholder="Jumlah"
-class="p-4 rounded-lg bg-black border border-white/10">
+<input id="jumlah" type="number" placeholder="Jumlah" required class="p-4 rounded-lg bg-black border border-white/10">
 
 <input id="keterangan" placeholder="Keterangan"
 class="p-4 rounded-lg bg-black border border-white/10">
     
 <button type="submit"
 class="bg-rose-600 hover:bg-rose-700 p-4 rounded-lg font-bold md:col-span-2">
-Booking
+Booking Sekarang
 </button>
 
 </form>
@@ -441,7 +437,7 @@ Ya, kami melayani pengiriman motor antar kota.
 
 <details class="bg-black p-6 rounded-xl">
 <summary class="font-bold cursor-pointer">
-lokasi Elfathan Travel dmna?
+Jangkauan Elfathan Travel dmna sja?
 </summary>
 <p class="mt-4 text-gray-400">
 Basecamp kami ada beberapa titik di pulau Sulawesi
@@ -531,50 +527,6 @@ class="fixed bottom-12 right-6 bg-green-500 hover:bg-green-600 text-white p-4 ro
 
 </a>
 
-<script>
-
-document.getElementById("bookingForm").addEventListener("submit", function(e){
-
-e.preventDefault();
-
-let layanan = this.querySelector("select").value;
-let inputs = this.querySelectorAll("input");
-
-let labelJumlah = (layanan === "barang") ? "Jumlah Barang" : "Jumlah Penumpang";
-let labelKet = (layanan === "barang") ? "Jenis Barang" : "Keterangan";
-    
-let nama = document.getElementById("nama").value;
-let rute = document.getElementById("rute").value;
-let tanggalRaw = document.getElementById("tanggal").value;
-let jumlah = document.getElementById("jumlah").value;
-let keterangan = document.getElementById("keterangan").value;
-let tanggal = "";
-
-if(tanggalRaw){
-let parts = tanggalRaw.split("-");
-tanggal = parts[2] + "/" + parts[1] + "/" + parts[0];
-}
-
-let pesan = `Halo Elfathan Travel 👋
-
-Saya ingin melakukan pemesanan:
-
-📌 *Jenis Layanan* : ${layanan}
-👤 *Nama* : ${nama}
-📍 *Rute / Tujuan* : ${rute}
-📦 *${labelJumlah}* : ${jumlah}
-📅 *Tanggal* : ${tanggal}
-📝 *${labelKet}* : ${keterangan}
-
-Mohon informasi lebih lanjut. Terima kasih 🙏`;
-
-let url = "https://wa.me/6285330000882?text=" + encodeURIComponent(pesan);
-
-window.open(url, "_blank");
-
-});
-
-</script>
 
 <script>
 document.querySelectorAll("img").forEach(img => {
@@ -654,11 +606,6 @@ document.addEventListener("DOMContentLoaded", function(){
     const jumlahInput = document.getElementById("jumlah");
     const keteranganInput = document.getElementById("keterangan");
 
-    if(!layanan || !jumlahInput || !keteranganInput){
-        console.error("ID tidak ditemukan");
-        return;
-    }
-
 function updatePlaceholder() {
 
     console.log("TERPANGGIL:", layanan.value);
@@ -676,11 +623,59 @@ function updatePlaceholder() {
     } 
     else if(layanan.value === "barang"){
         jumlahInput.placeholder = "Jumlah Barang";
-        keteranganInput.placeholder = "Jenis Barang (Motor, dll)";
+        keteranganInput.placeholder = "Jenis Barang (Motor, Ayam dll)";
     }
-}
-    updatePlaceholder();
+ else {
+            jumlah.placeholder = "Jumlah";
+            keterangan.placeholder = "Keterangan";
+        }
+    }
     layanan.addEventListener("change", updatePlaceholder);
+    updatePlaceholder();
+
+});
+// SUBMIT KE WHATSAPP
+document.getElementById("bookingForm").addEventListener("submit", function(e){
+
+   e.preventDefault();
+
+    let layanan = document.getElementById("layanan").value;
+    let nama = document.getElementById("nama").value;
+    let rute = document.getElementById("rute").value;
+    let tanggalRaw = document.getElementById("tanggal").value;
+    let jumlah = document.getElementById("jumlah").value;
+    let keterangan = document.getElementById("keterangan").value;
+
+    let labelJumlah = (layanan === "barang") ? "Jumlah Barang" : "Jumlah Penumpang";
+    let labelKet = (layanan === "barang") ? "Jenis Barang" : "Keterangan";
+
+    let tanggal = "";
+    if(tanggalRaw){
+        let parts = tanggalRaw.split("-");
+        if(parts.length === 3){
+            tanggal = parts[2] + "/" + parts[1] + "/" + parts[0];
+        } else {
+            tanggal = tanggalRaw;
+        }
+    }
+
+
+let pesan = `Halo Elfathan Travel 👋
+
+Saya ingin melakukan pemesanan:
+
+📌 *Jenis Layanan* : ${layanan}
+👤 *Nama* : ${nama}
+📍 *Rute / Tujuan* : ${rute}
+📦 *${labelJumlah}* : ${jumlah}
+📅 *Tanggal* : ${tanggal}
+📝 *${labelKet}* : ${keterangan}
+
+Mohon informasi lebih lanjut. Terima kasih 🙏`;
+
+let url = "https://wa.me/6285330000882?text=" + encodeURIComponent(pesan);
+
+window.open(url, "_blank");
 
 });
 </script>
