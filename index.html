@@ -657,8 +657,6 @@ document.addEventListener("DOMContentLoaded", function(){
 
     function updatePlaceholder() {
 
-        console.log("Dipilih:", layanan.value); // DEBUG
-
         if(layanan.value === "Penumpang"){
             jumlahInput.placeholder = "Jumlah Penumpang";
             keteranganInput.placeholder = "Keterangan / Request Tambahan";
@@ -673,7 +671,12 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     }
 
+    // 🔥 WAJIB: jalan saat pertama load
+    updatePlaceholder();
+
+    // 🔥 jalan saat dropdown berubah
     layanan.addEventListener("change", updatePlaceholder);
+    layanan.addEventListener("input", updatePlaceholder);
 
 });
 </script>
