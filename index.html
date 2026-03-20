@@ -357,7 +357,7 @@ onblur="if(!this.value)this.type='text'"
 class="p-4 rounded-lg bg-black border border-white/10">
 
 
-<input id="jumlah" type="number" placeholder="Jumlah"
+<input id="Jumlah" type="number" placeholder="Jumlah"
 class="p-4 rounded-lg bg-black border border-white/10">
 
 
@@ -547,7 +547,7 @@ let labelKet = (layanan === "Kirim Barang") ? "Jenis Barang" : "Keterangan";
 let nama = document.getElementById("nama").value;
 let rute = document.getElementById("rute").value;
 let tanggalRaw = document.getElementById("tanggal").value;
-let jumlah = document.getElementById("jumlah").value;
+let Jumlah = document.getElementById("Jumlah").value;
 let keterangan = document.getElementById("keterangan").value;
 let tanggal = "";
 
@@ -563,7 +563,7 @@ Saya ingin melakukan pemesanan:
 📌 *Jenis Layanan* : ${layanan}
 👤 *Nama* : ${nama}
 📍 *Rute / Tujuan* : ${rute}
-📦 *${labelJumlah}* : ${jumlah}
+📦 *${labelJumlah}* : ${Jumlah}
 📅 *Tanggal* : ${tanggal}
 📝 *${labelKet}* : ${keterangan}
 
@@ -652,25 +652,25 @@ document.querySelector("nav a[href*=" + id + "]")?.classList.add("text-rose-600"
 document.addEventListener("DOMContentLoaded", function(){
 
     const layanan = document.getElementById("layanan");
-    const jumlah = document.getElementById("jumlah");
+    const Jumlah = document.getElementById("Jumlah");
     const keterangan = document.getElementById("keterangan");
 
     layanan.addEventListener("change", function(){
 
     // 🔥 reset isi biar placeholder terlihat
-    jumlah.value = "";
+    Jumlah.value = "";
     keterangan.value = "";
         
         if(this.value === "Penumpang"){
-            jumlah.placeholder = "Jumlah Penumpang";
+            Jumlah.placeholder = "Jumlah Penumpang";
             keterangan.placeholder = "Keterangan / Request Tambahan";
         } 
         else if(this.value === "Kirim Barang"){
-            jumlah.placeholder = "Jumlah Barang";
+            Jumlah.placeholder = "Jumlah Barang";
             keterangan.placeholder = "Jenis Barang (Contoh: Koper, Ayam, dll)";
         }
         else {
-            jumlah.placeholder = "Jumlah";
+            Jumlah.placeholder = "Jumlah";
             keterangan.placeholder = "Keterangan";
         }
 
