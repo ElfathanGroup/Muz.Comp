@@ -103,7 +103,7 @@
                     <a href="#rute" class="hover:text-rose-600 transition">RUTE</a>
                     <a href="#keunggulan" class="hover:text-brand-red transition">KEUNGGULAN</a>
                     <a href="#about" class="hover:text-rose-600 transition">TENTANG</a>
-                    <a href="#foto" class="hover:text-rose-600 transition">GALERI</a>
+                    <a href="#foto" class="hover:text-rose-600 transition">GALErRI</a>
                     <a href="#layanan" class="hover:text-rose-600 transition">LAYANAN</a>
                 </div>
                 <a href="#booking" class="text-white bg-rose-600 hover:bg-rose-700 px-6 py-2 rounded-full text-[10px] font-black transition-transform hover:scale-105 shadow-[0_0_15px_rgba(225,29,72,0.4)]">PESAN SEKARANG</a>
@@ -338,8 +338,8 @@ Booking Travel Online
 
 <select id="layanan" required class="p-4 rounded-lg bg-black border border-white/10">
 <option value="">Pilih Layanan</option>
-<option value="Penumpang">Penumpang</option>
-<option value="Kirim Barang">Kirim Barang</option>
+<option value="penumpang">Penumpang</option>
+<option value="barang">Kirim Barang</option>
 </select>
 
 <input id="nama" placeholder="Nama"
@@ -655,15 +655,15 @@ window.addEventListener("load", function(){
     const jumlahInput = document.getElementById("jumlah");
     const keteranganInput = document.getElementById("keterangan");
 
-    if(!layanan) return; // pengaman
+    if(!layanan) return;
 
     function updatePlaceholder() {
 
-        if(layanan.value === "Penumpang"){
+        if(layanan.value === "penumpang"){
             jumlahInput.placeholder = "Jumlah Penumpang";
             keteranganInput.placeholder = "Keterangan / Request Tambahan";
         } 
-        else if(layanan.value === "Kirim Barang"){
+        else if(layanan.value === "barang"){
             jumlahInput.placeholder = "Jumlah Barang";
             keteranganInput.placeholder = "Jenis Barang (Motor, dll)";
         } 
@@ -673,10 +673,8 @@ window.addEventListener("load", function(){
         }
     }
 
-    // pertama kali load
     updatePlaceholder();
 
-    // saat user pilih
     layanan.addEventListener("change", updatePlaceholder);
 
 });
