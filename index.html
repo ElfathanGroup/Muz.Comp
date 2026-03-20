@@ -649,36 +649,32 @@ document.querySelector("nav a[href*=" + id + "]")?.classList.add("text-rose-600"
 </script>
 
 <script>
-document.addEventListener("DOMContentLoaded", function(){
+const layanan = document.getElementById("layanan");
+const jumlahInput = document.getElementById("jumlah");
+const keteranganInput = document.getElementById("keterangan");
 
-    const layanan = document.getElementById("layanan");
-    const jumlahInput = document.getElementById("jumlah");
-    const keteranganInput = document.getElementById("keterangan");
+function updatePlaceholder() {
 
-    function updatePlaceholder() {
-
-        if(layanan.value === "Penumpang"){
-            jumlahInput.placeholder = "Jumlah Penumpang";
-            keteranganInput.placeholder = "Keterangan / Request Tambahan";
-        } 
-        else if(layanan.value === "Kirim Barang"){
-            jumlahInput.placeholder = "Jumlah Barang";
-            keteranganInput.placeholder = "Jenis Barang (Motor, dll)";
-        } 
-        else {
-            jumlahInput.placeholder = "Jumlah";
-            keteranganInput.placeholder = "Keterangan";
-        }
+    if(layanan.value === "Penumpang"){
+        jumlahInput.placeholder = "Jumlah Penumpang";
+        keteranganInput.placeholder = "Keterangan / Request Tambahan";
+    } 
+    else if(layanan.value === "Kirim Barang"){
+        jumlahInput.placeholder = "Jumlah Barang";
+        keteranganInput.placeholder = "Jenis Barang (Motor, dll)";
+    } 
+    else {
+        jumlahInput.placeholder = "Jumlah";
+        keteranganInput.placeholder = "Keterangan";
     }
+}
 
-    // 🔥 WAJIB: jalan saat pertama load
-    updatePlaceholder();
+// jalan saat pertama load
+updatePlaceholder();
 
-    // 🔥 jalan saat dropdown berubah
-    layanan.addEventListener("change", updatePlaceholder);
-    layanan.addEventListener("input", updatePlaceholder);
-
-});
+// event saat berubah
+layanan.addEventListener("change", updatePlaceholder);
+layanan.addEventListener("input", updatePlaceholder);
 </script>
 </body>
 </html>
