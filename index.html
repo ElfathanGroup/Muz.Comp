@@ -103,7 +103,7 @@
                     <a href="#rute" class="hover:text-rose-600 transition">RUTE</a>
                     <a href="#keunggulan" class="hover:text-brand-red transition">KEUNGGULAN</a>
                     <a href="#about" class="hover:text-rose-600 transition">TENTANG</a>
-                    <a href="#foto" class="hover:text-rose-600 transition">GALERI</a>
+                    <a href="#foto" class="hover:text-rose-600 transition">GALErRI</a>
                     <a href="#layanan" class="hover:text-rose-600 transition">LAYANAN</a>
                 </div>
                 <a href="#booking" class="text-white bg-rose-600 hover:bg-rose-700 px-6 py-2 rounded-full text-[10px] font-black transition-transform hover:scale-105 shadow-[0_0_15px_rgba(225,29,72,0.4)]">PESAN SEKARANG</a>
@@ -357,7 +357,7 @@ onblur="if(!this.value)this.type='text'"
 class="p-4 rounded-lg bg-black border border-white/10">
 
 
-<input id="Jumlah" type="number" placeholder="Jumlah"
+<input id="jumlah" type="number" placeholder="Jumlah"
 class="p-4 rounded-lg bg-black border border-white/10">
 
 
@@ -547,7 +547,7 @@ let labelKet = (layanan === "Kirim Barang") ? "Jenis Barang" : "Keterangan";
 let nama = document.getElementById("nama").value;
 let rute = document.getElementById("rute").value;
 let tanggalRaw = document.getElementById("tanggal").value;
-let Jumlah = document.getElementById("Jumlah").value;
+let jumlah = document.getElementById("jumlah").value;
 let keterangan = document.getElementById("keterangan").value;
 let tanggal = "";
 
@@ -563,7 +563,7 @@ Saya ingin melakukan pemesanan:
 📌 *Jenis Layanan* : ${layanan}
 👤 *Nama* : ${nama}
 📍 *Rute / Tujuan* : ${rute}
-📦 *${labelJumlah}* : ${Jumlah}
+📦 *${labelJumlah}* : ${jumlah}
 📅 *Tanggal* : ${tanggal}
 📝 *${labelKet}* : ${keterangan}
 
@@ -652,32 +652,34 @@ document.querySelector("nav a[href*=" + id + "]")?.classList.add("text-rose-600"
 document.addEventListener("DOMContentLoaded", function(){
 
     const layanan = document.getElementById("layanan");
-    const Jumlah = document.getElementById("Jumlah");
-    const keterangan = document.getElementById("keterangan");
+    const jumlahInput = document.getElementById("jumlah");
+    const keteranganInput = document.getElementById("keterangan");
 
-    layanan.addEventListener("change", function(){
+    function updatePlaceholder() {
 
-    // 🔥 reset isi biar placeholder terlihat
-    Jumlah.value = "";
-    keterangan.value = "";
-        
-        if(this.value === "Penumpang"){
-            Jumlah.placeholder = "Jumlah Penumpang";
-            keterangan.placeholder = "Keterangan / Request Tambahan";
+        // reset value biar bersih
+        jumlahInput.value = "";
+        keteranganInput.value = "";
+
+        if(layanan.value === "Penumpang"){
+            jumlahInput.placeholder = "Jumlah Penumpang";
+            keteranganInput.placeholder = "Keterangan / Request Tambahan";
         } 
-        else if(this.value === "Kirim Barang"){
-            Jumlah.placeholder = "Jumlah Barang";
-            keterangan.placeholder = "Jenis Barang (Contoh: Koper, Ayam, dll)";
-        }
+        else if(layanan.value === "Kirim Barang"){
+            jumlahInput.placeholder = "Jumlah Barang";
+            keteranganInput.placeholder = "Jenis Barang (Contoh: Motor, Koper, Ayam, dll)";
+        } 
         else {
-            Jumlah.placeholder = "Jumlah";
-            keterangan.placeholder = "Keterangan";
+            jumlahInput.placeholder = "Jumlah";
+            keteranganInput.placeholder = "Keterangan";
         }
+    }
 
-    });
+    // jalan saat user ganti pilihan
+    layanan.addEventListener("change", updatePlaceholder);
 
-    // 🔥 langsung aktif saat halaman dibuka
-    layanan.dispatchEvent(new Event("change"));
+    // jalan saat pertama load
+    updatePlaceholder();
 
 });
 </script>
