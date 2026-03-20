@@ -657,9 +657,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
     function updatePlaceholder() {
 
-        // reset value biar bersih
-        jumlahInput.value = "";
-        keteranganInput.value = "";
+        console.log("Dipilih:", layanan.value); // DEBUG
 
         if(layanan.value === "Penumpang"){
             jumlahInput.placeholder = "Jumlah Penumpang";
@@ -667,7 +665,7 @@ document.addEventListener("DOMContentLoaded", function(){
         } 
         else if(layanan.value === "Kirim Barang"){
             jumlahInput.placeholder = "Jumlah Barang";
-            keteranganInput.placeholder = "Jenis Barang (Contoh: Motor, Koper, Ayam, dll)";
+            keteranganInput.placeholder = "Jenis Barang (Motor, dll)";
         } 
         else {
             jumlahInput.placeholder = "Jumlah";
@@ -675,11 +673,7 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     }
 
-    // jalan saat user ganti pilihan
     layanan.addEventListener("change", updatePlaceholder);
-
-    // jalan saat pertama load
-    updatePlaceholder();
 
 });
 </script>
