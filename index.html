@@ -336,37 +336,25 @@ Booking Travel Online
 </h2>
 
 <form id="bookingForm" class="grid md:grid-cols-2 gap-6">
+    <select id="selectLayanan" required class="p-4 rounded-lg bg-black border border-white/10 text-white">
+        <option value="">Pilih Layanan</option>
+        <option value="penumpang">Penumpang</option>
+        <option value="barang">Kirim Barang</option>
+    </select>
 
-<select required class="p-4 rounded-lg bg-black border border-white/10">
-<option value="">Pilih Layanan</option>
-<option value="Penumpang">Penumpang</option>
-<option value="Kirim Barang">Kirim Barang</option>
-</select>
-
-<input required placeholder="Nama"
-class="p-4 rounded-lg bg-black border border-white/10">
-
-<input placeholder="Rute / Alamat Tujuan"
-class="p-4 rounded-lg bg-black border border-white/10">
-
-<input 
-type="text"
-placeholder="DD/MM/YYYY"
-onfocus="(this.type='date')"
-onblur="if(!this.value)this.type='text'"
-class="p-4 rounded-lg bg-black border border-white/10">
-
-<input type="number" placeholder="Jumlah Penumpang / Barang"
-class="p-4 rounded-lg bg-black border border-white/10">
-
-<input placeholder="Keterangan / Request Tambahan"
-class="p-4 rounded-lg bg-black border border-white/10">
+    <input id="inputNama" type="text" placeholder="Nama Lengkap" required class="p-4 rounded-lg bg-black border border-white/10 text-white">
+    <input id="inputRute" type="text" placeholder="Rute (Cth: Mks 👉 Palu)" required class="p-4 rounded-lg bg-black border border-white/10 text-white">
     
-<button type="submit"
-class="bg-rose-600 hover:bg-rose-700 p-4 rounded-lg font-bold md:col-span-2">
-Kirim Booking via WhatsApp
-</button>
+    <input id="inputTanggal" type="text" placeholder="Tanggal Berangkat (DD/MM/YYYY)" 
+           onfocus="this.type='date'" onblur="if(!this.value)this.type='text'" 
+           required class="p-4 rounded-lg bg-black border border-white/10 text-white">
 
+    <input id="inputJumlah" type="number" placeholder="Pilih Layanan Dulu" required class="p-4 rounded-lg bg-black border border-white/10 text-white">
+    <input id="inputKeterangan" type="text" placeholder="Pilih Layanan Dulu" class="p-4 rounded-lg bg-black border border-white/10 text-white">
+    
+    <button type="submit" class="bg-rose-600 hover:bg-rose-700 p-4 rounded-lg font-bold md:col-span-2 transition-all">
+        Booking Sekarang
+    </button>
 </form>
 
 </div>
@@ -440,7 +428,7 @@ Ya, kami melayani pengiriman motor antar kota.
 
 <details class="bg-black p-6 rounded-xl">
 <summary class="font-bold cursor-pointer">
-lokasi Elfathan Travel dmna?
+Jangkauan Elfathan Travel dimna saja?
 </summary>
 <p class="mt-4 text-gray-400">
 Basecamp kami ada beberapa titik di pulau Sulawesi
@@ -531,47 +519,50 @@ class="fixed bottom-12 right-6 bg-green-500 hover:bg-green-600 text-white p-4 ro
 </a>
 
 <script>
+document.addEventListener("DOMContentLoaded", function(){
+    const form = document.getElementById("bookingForm");
+    const layanan = document.getElementById("selectLayanan");
+    const jumlahInput = document.getElementById("inputJumlah");
+    const keteranganInput = document.getElementById("inputKeterangan");
 
-document.getElementById("bookingForm").addEventListener("submit", function(e){
+    // Update Placeholder secara dinamis
+    layanan.addEventListener("change", function() {
+        if(this.value === "penumpang"){
+            jumlahInput.placeholder = "Jumlah Penumpang";
+            keteranganInput.placeholder = "Keterangan (Cth: Jemput di Bandara, Kursi depan)";
+        } else if(this.value === "barang"){
+            jumlahInput.placeholder = "Berat (Kg)/Jumlah Koli";
+            keteranganInput.placeholder = "Jenis Barang (Cth: Motor, Paket Dokumen, Ayam)";
+        } else {
+            jumlahInput.placeholder = "Jumlah";
+            keteranganInput.placeholder = "Keterangan";
+        }
+    });
 
-e.preventDefault();
+    // Handle Submit
+    form.addEventListener("submit", function(e){
+        e.preventDefault();
+        
+        let tgl = document.getElementById("inputTanggal").value;
+        // Format tanggal jika diperlukan
+        if(tgl.includes("-")) {
+            const [y, m, d] = tgl.split("-");
+            tgl = `${d}/${m}/${y}`;
+        }
 
-let layanan = this.querySelector("select").value;
-let inputs = this.querySelectorAll("input");
+        const pesan = `Halo Elfathan Travel 👋%0A%0A` +
+                    `Saya ingin booking melalui website:%0A` +
+                    `📌 *Layanan*: ${layanan.value.toUpperCase()}%0A` +
+                    `👤 *Nama*: ${document.getElementById("inputNama").value}%0A` +
+                    `📍 *Rute*: ${document.getElementById("inputRute").value}%0A` +
+                    `📅 *Tanggal*: ${tgl}%0A` +
+                    `📦 *Jumlah*: ${jumlahInput.value}%0A` +
+                    `📝 *Ket*: ${keteranganInput.value}`;
 
-let nama = inputs[0].value;
-let rute = inputs[1].value;
-let tanggalRaw = inputs[2].value;
-let jumlah = inputs[3].value;
-let keterangan = inputs[4].value;
-let tanggal = "";
-
-if(tanggalRaw){
-let parts = tanggalRaw.split("-");
-tanggal = parts[2] + "/" + parts[1] + "/" + parts[0];
-}
-
-let pesan = `Halo Elfathan Travel,
-
-Saya ingin melakukan pemesanan.
-
-Jenis Layanan : ${layanan}
-Nama : ${nama}
-Rute / Tujuan : ${rute}
-Jumlah : ${jumlah}
-Tanggal : ${tanggal}
-Ket : ${keterangan}
-
-Mohon informasi lebih lanjut.`;
-
-let url = "https://wa.me/6285330000882?text=" + encodeURIComponent(pesan);
-
-window.open(url, "_blank");
-
+        window.open(`https://wa.me/6285330000882?text=${pesan}`, "_blank");
+    });
 });
-
 </script>
-
 
 <script>
 
