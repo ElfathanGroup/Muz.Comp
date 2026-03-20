@@ -103,7 +103,7 @@
                     <a href="#rute" class="hover:text-rose-600 transition">RUTE</a>
                     <a href="#keunggulan" class="hover:text-brand-red transition">KEUNGGULAN</a>
                     <a href="#about" class="hover:text-rose-600 transition">TENTANG</a>
-                    <a href="#foto" class="hover:text-rose-600 transition">GALErRI</a>
+                    <a href="#foto" class="hover:text-rose-600 transition">GALERI</a>
                     <a href="#layanan" class="hover:text-rose-600 transition">LAYANAN</a>
                 </div>
                 <a href="#booking" class="text-white bg-rose-600 hover:bg-rose-700 px-6 py-2 rounded-full text-[10px] font-black transition-transform hover:scale-105 shadow-[0_0_15px_rgba(225,29,72,0.4)]">PESAN SEKARANG</a>
@@ -649,32 +649,37 @@ document.querySelector("nav a[href*=" + id + "]")?.classList.add("text-rose-600"
 </script>
 
 <script>
-const layanan = document.getElementById("layanan");
-const jumlahInput = document.getElementById("jumlah");
-const keteranganInput = document.getElementById("keterangan");
+window.addEventListener("load", function(){
 
-function updatePlaceholder() {
+    const layanan = document.getElementById("layanan");
+    const jumlahInput = document.getElementById("jumlah");
+    const keteranganInput = document.getElementById("keterangan");
 
-    if(layanan.value === "Penumpang"){
-        jumlahInput.placeholder = "Jumlah Penumpang";
-        keteranganInput.placeholder = "Keterangan / Request Tambahan";
-    } 
-    else if(layanan.value === "Kirim Barang"){
-        jumlahInput.placeholder = "Jumlah Barang";
-        keteranganInput.placeholder = "Jenis Barang (Motor, dll)";
-    } 
-    else {
-        jumlahInput.placeholder = "Jumlah";
-        keteranganInput.placeholder = "Keterangan";
+    if(!layanan) return; // pengaman
+
+    function updatePlaceholder() {
+
+        if(layanan.value === "Penumpang"){
+            jumlahInput.placeholder = "Jumlah Penumpang";
+            keteranganInput.placeholder = "Keterangan / Request Tambahan";
+        } 
+        else if(layanan.value === "Kirim Barang"){
+            jumlahInput.placeholder = "Jumlah Barang";
+            keteranganInput.placeholder = "Jenis Barang (Motor, dll)";
+        } 
+        else {
+            jumlahInput.placeholder = "Jumlah";
+            keteranganInput.placeholder = "Keterangan";
+        }
     }
-}
 
-// jalan saat pertama load
-updatePlaceholder();
+    // pertama kali load
+    updatePlaceholder();
 
-// event saat berubah
-layanan.addEventListener("change", updatePlaceholder);
-layanan.addEventListener("input", updatePlaceholder);
+    // saat user pilih
+    layanan.addEventListener("change", updatePlaceholder);
+
+});
 </script>
 </body>
 </html>
