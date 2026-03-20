@@ -103,7 +103,7 @@
                     <a href="#rute" class="hover:text-rose-600 transition">RUTE</a>
                     <a href="#keunggulan" class="hover:text-brand-red transition">KEUNGGULAN</a>
                     <a href="#about" class="hover:text-rose-600 transition">TENTANG</a>
-                    <a href="#foto" class="hover:text-rose-600 transition">GALErRI</a>
+                    <a href="#foto" class="hover:text-rose-600 transition">GALERI</a>
                     <a href="#layanan" class="hover:text-rose-600 transition">LAYANAN</a>
                 </div>
                 <a href="#booking" class="text-white bg-rose-600 hover:bg-rose-700 px-6 py-2 rounded-full text-[10px] font-black transition-transform hover:scale-105 shadow-[0_0_15px_rgba(225,29,72,0.4)]">PESAN SEKARANG</a>
@@ -356,11 +356,11 @@ onfocus="(this.type='date')"
 onblur="if(!this.value)this.type='text'"
 class="p-4 rounded-lg bg-black border border-white/10">
 
-<label id="labelJumlah" class="text-sm text-gray-400">Jumlah Penumpang</label>
+
 <input id="jumlah" type="number" placeholder="Jumlah Penumpang"
 class="p-4 rounded-lg bg-black border border-white/10">
 
-<label id="labelKeterangan" class="text-sm text-gray-400">Keterangan</label>
+
 <input id="keterangan" placeholder="Keterangan / Request Tambahan"
 class="p-4 rounded-lg bg-black border border-white/10">
     
@@ -578,43 +578,23 @@ window.open(url, "_blank");
 </script>
 
 <script>
+const layanan = document.getElementById("layanan");
+const jumlah = document.getElementById("jumlah");
+const keterangan = document.getElementById("keterangan");
 
-const layananSelect = document.getElementById("layanan");
-const jumlahInput = document.getElementById("jumlah");
-const keteranganInput = document.getElementById("keterangan");
-const labelJumlah = document.getElementById("labelJumlah");
-const labelKeterangan = document.getElementById("labelKeterangan");
-    
-layananSelect.addEventListener("change", function(){
+layanan.addEventListener("change", function(){
 
-    let value = this.value;
-
-    if(value === "Penumpang"){
-        labelJumlah.textContent = "Jumlah Penumpang";
-        jumlahInput.placeholder = "Jumlah Penumpang";
-
-        labelKeterangan.textContent = "Keterangan";
-        keteranganInput.placeholder = "Keterangan / Request Tambahan (Opsional)";
-    }
-    
-    else if(value === "Kirim Barang"){
-        labelJumlah.textContent = "Jumlah Barang";
-        jumlahInput.placeholder = "Jumlah Barang";
-
-        labelKeterangan.textContent = "Jenis Barang";
-        keteranganInput.placeholder = "Jenis Barang (Contoh: Tas, Ayam dll";
+    if(this.value === "Penumpang"){
+        jumlah.placeholder = "Jumlah Penumpang";
+        keterangan.placeholder = "Keterangan / Request Tambahan";
     }
 
-    else{
-        labelJumlah.textContent = "Jumlah";
-        jumlahInput.placeholder = "Jumlah";
-
-        labelKeterangan.textContent = "Keterangan";
-        keteranganInput.placeholder = "Keterangan";
+    else if(this.value === "Kirim Barang"){
+        jumlah.placeholder = "Jumlah Barang";
+        keterangan.placeholder = "Jenis Barang (Tas, Ayam, dll)";
     }
 
 });
-
 </script>
 
 <script>
