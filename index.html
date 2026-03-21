@@ -533,37 +533,44 @@ document.addEventListener("DOMContentLoaded", function(){
     const formNoPenerima = document.getElementById("inputNoPenerima");
 
 // Update form secara dinamis
-    layanan.addEventListener("change", function() {
-        if(this.value === "penumpang"){
-            namaInput.placeholder = "Booking Name"; // <--- Tambahkan baris ini
-            jumlahInput.placeholder = "Jumlah Penumpang";
-            keteranganInput.placeholder = "Keterangan (Cth: Jemput di Bandara, Kursi depan)";
-            // Sembunyikan form penerima
-            formNamaPenerima.classList.add("hidden");
-            formNoPenerima.classList.add("hidden");
-            formNamaPenerima.required = false;
-            formNoPenerima.required = false;
-        } else if(this.value === "barang"){
-            namaInput.placeholder = "Nama Pengirim"; // <--- Tambahkan baris ini
-            jumlahInput.placeholder = "Berat (Kg)/Jumlah Koli";
-            keteranganInput.placeholder = "Jenis Barang (Cth: Motor, Paket Dokumen, Ayam)";
-            // Tampilkan form penerima & wajibkan isi
-            formNamaPenerima.classList.remove("hidden");
-            formNoPenerima.classList.remove("hidden");
-            formNamaPenerima.required = true;
-            formNoPenerima.required = true;
-        } else {
-            namaInput.placeholder = "Booking Name"; // <--- Default jika belum memilih
-            jumlahInput.placeholder = "Jumlah";
-            keteranganInput.placeholder = "Keterangan";
-            // Sembunyikan form penerima
-            formNamaPenerima.classList.add("hidden");
-            formNoPenerima.classList.add("hidden");
-            formNamaPenerima.required = false;
-            formNoPenerima.required = false;
-        }
-    });
-    
+function updateForm() {
+    if(layanan.value === "penumpang"){
+        namaInput.placeholder = "Booking Name";
+        jumlahInput.placeholder = "Jumlah Penumpang";
+        keteranganInput.placeholder = "Keterangan (Cth: Jemput di Bandara, Kursi depan)";
+
+        formNamaPenerima.classList.add("hidden");
+        formNoPenerima.classList.add("hidden");
+        formNamaPenerima.required = false;
+        formNoPenerima.required = false;
+
+    } else if(layanan.value === "barang"){
+        namaInput.placeholder = "Nama Pengirim";
+        jumlahInput.placeholder = "Berat (Kg)/Jumlah Koli";
+        keteranganInput.placeholder = "Jenis Barang (Cth: Motor, Paket Dokumen, Ayam)";
+
+        formNamaPenerima.classList.remove("hidden");
+        formNoPenerima.classList.remove("hidden");
+        formNamaPenerima.required = true;
+        formNoPenerima.required = true;
+
+    } else {
+        namaInput.placeholder = "Booking Name";
+        jumlahInput.placeholder = "Jumlah";
+        keteranganInput.placeholder = "Keterangan";
+
+        formNamaPenerima.classList.add("hidden");
+        formNoPenerima.classList.add("hidden");
+        formNamaPenerima.required = false;
+        formNoPenerima.required = false;
+    }
+}
+
+// trigger saat user pilih
+layanan.addEventListener("change", updateForm);
+
+// 🔥 trigger saat pertama load
+updateForm();    
     // Handle Submit
     form.addEventListener("submit", function(e){
         e.preventDefault();
