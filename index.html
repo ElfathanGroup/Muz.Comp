@@ -629,6 +629,11 @@ pesan += `%0A%0A> Note Driver:%0A` +
             btnSubmit.innerHTML = originalText;
             btnSubmit.classList.remove("opacity-75", "cursor-not-allowed");
             form.reset(); // Mengosongkan isian form setelah submit
+            
+            // 👇 TAMBAHAN UNTUK MEMUNCULKAN PLACEHOLDER TANGGAL KEMBALI 👇
+            let inputTgl = document.getElementById("inputTanggal");
+            if(inputTgl) inputTgl.type = "text"; 
+            
             updateForm(); // reset juga placeholder & field
         }, 800);
     });
