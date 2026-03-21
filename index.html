@@ -349,8 +349,8 @@ Booking Travel Online
            onfocus="this.type='date'" onblur="if(!this.value)this.type='text'" 
            required class="p-4 rounded-lg bg-black border border-white/10 text-white">
 
-    <input id="inputJumlah" type="number" placeholder="Harap Pilih Layanan Dulu" required class="p-4 rounded-lg bg-black border border-white/10 text-white">
-    <input id="inputKeterangan" type="text" placeholder="Harap Pilih Layanan Dulu" class="p-4 rounded-lg bg-black border border-white/10 text-white">
+    <input id="inputJumlah" type="number" placeholder="Jumlah" required class="p-4 rounded-lg bg-black border border-white/10 text-white">
+    <input id="inputKeterangan" type="text" placeholder="Keterangan" class="p-4 rounded-lg bg-black border border-white/10 text-white">
     
     <button type="submit" class="bg-rose-600 hover:bg-rose-700 p-4 rounded-lg font-bold md:col-span-2 transition-all">
         Booking Sekarang
@@ -556,8 +556,8 @@ function updateForm() {
 
     } else {
         namaInput.placeholder = "Booking Name";
-        jumlahInput.placeholder = "Jumlah";
-        keteranganInput.placeholder = "Keterangan";
+        jumlahInput.placeholder = "Harap Pilih Penumpang/Barang";
+        keteranganInput.placeholder = "Harap Pilih Penumpang/Barang";
 
         formNamaPenerima.classList.add("hidden");
         formNoPenerima.classList.add("hidden");
