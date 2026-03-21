@@ -602,7 +602,7 @@ updateForm();
         let pesan = "";
 
         if (layanan.value === "penumpang") {
-            pesan = `Halo Elfathan Travel 👋%0A%0ASaya ingin pesan tiket *Penumpang*:%0A%0A` +
+            pesan = `Halo Elfathan Travel 👋%0A%0ASaya ingin pesan Tiket *Penumpang*:%0A%0A` +
                     `👤 *Nama*: ${nama}%0A` +
                     `📍 *Rute*: ${rute}%0A` +
                     `📅 *Tanggal Berangkat*: ${tgl}%0A` +
@@ -615,10 +615,14 @@ updateForm();
                     `📱 *No HP Penerima*: ${noHpPenerima}%0A` +
                     `📍 *Rute Tujuan*: ${rute}%0A` +
                     `📅 *Tanggal Dikirim*: ${tgl}%0A` +
-                    `📦 *Jumlah Paket*: ${jumlah}%0A` +
+                    `📦 *Jumlah Paket*: ${jumlah} Pcs%0A` +
                     `📝 *Detail Barang*: ${ket}`;
         }
-
+// Menambahkan Note Driver di baris paling bawah untuk semua layanan
+pesan += `%0A%0A> Note Driver:%0A` +
+         `- Ini Booking Via Elfathan.Travel.web.id%0A` +
+         `- Chat 085 330000 882 yg bisa Kondisikan`;
+        
         setTimeout(() => {
             window.open(`https://wa.me/6285330000882?text=${pesan}`, "_blank");
             // Kembalikan tombol seperti semula setelah 0.8 detik
