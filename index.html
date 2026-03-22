@@ -628,20 +628,20 @@ updateForm();
 
         if (layanan.value === "penumpang") {
             pesan = `Halo *Elfathan Travel* 👋%0A%0ASaya ingin pesan Tiket *Penumpang*:%0A%0A` +
-                    `👤 ${nama}%0A` +
-                    `📍 ${rute}%0A` +
-                    `📅 ${tgl}%0A` +
-                    `💺 ${jumlah} Orang%0A` +
-                    `📝 ${ket}`;
+                    `👤 : ${nama}%0A` +
+                    `📍 : ${rute}%0A` +
+                    `📅 : ${tgl}%0A` +
+                    `💺 : ${jumlah} Orang%0A` +
+                    `📝 : ${ket}`;
         } else if (layanan.value === "barang") {
             pesan = `Halo *Elfathan Travel* 👋%0A%0ASaya ingin menggunakan layanan *Kirim Barang*:%0A%0A` +
-                    `👤 *Pengirim*	: ${nama}%0A` +
+                    `👤📤 *Pengirim*	: ${nama}%0A` +
                     `👤📥 *Penerima*	: ${nPenerima}%0A` +
-                    `📱 *Penerima*	: ${noHpPenerima}%0A` +
-                    `📍 ${rute}%0A` +
-                    `📅 ${tgl}%0A` +
-                    `📦 ${jumlah} Pcs%0A` +
-                    `📝 ${ket}`;
+                    `📱📥 *Penerima*	: ${noHpPenerima}%0A` +
+                    `📍 : ${rute}%0A` +
+                    `📅 : ${tgl}%0A` +
+                    `📦 : ${jumlah} Pcs%0A` +
+                    `📝 : ${ket}`;
         }
 // Menambahkan Note Driver di baris paling bawah untuk semua layanan
 pesan += `%0A%0A> Note Driver:%0A` +
