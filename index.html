@@ -610,28 +610,28 @@ updateForm();
         const noHpPenerima = document.getElementById("inputNoPenerima").value;
 
         // PERBAIKAN 3: Logika pemisah format pesan WA
-        let pesan = "";
+        let isipesan = "";
 
         if (layanan.value === "penumpang") {
-            pesan = `Saya ingin pesan Tiket *Penumpang*:%0A%0A` +
-                    `👤 : ${nama}%0A` +
-                    `📍 : ${rute}%0A` +
-                    `📅 : ${tgl}%0A` +
-                    `💺 : ${jumlah} Orang%0A` +
+            isipesan = `Saya ingin pesan Tiket *Penumpang*:\n\n` +
+                    `👤 : ${nama}\n` +
+                    `📍 : ${rute}\n` +
+                    `📅 : ${tgl}\n` +
+                    `💺 : ${jumlah} Orang\n` +
                     `📝 : ${ket}`;
         } else if (layanan.value === "barang") {
-            pesan = `Saya ingin menggunakan layanan *Kirim Barang*:%0A%0A` +
-                    `👤📤 (*Pengirim*)	: ${nama}%0A` +
-                    `👤📥 (*Penerima*)	: ${nPenerima}%0A` +
-                    `📱📥 (*Penerima*)	: ${noHpPenerima}%0A` +
-                    `📍 : ${rute}%0A` +
-                    `📅 : ${tgl}%0A` +
-                    `📦 : ${jumlah} Pcs%0A` +
+            isipesan = `Saya ingin menggunakan layanan *Kirim Barang*:\n\n` +
+                    `👤📤 (*Pengirim*)	: ${nama}\n` +
+                    `👤📥 (*Penerima*)	: ${nPenerima}\n` +
+                    `📱📥 (*Penerima*)	: ${noHpPenerima}\n` +
+                    `📍 : ${rute}\n` +
+                    `📅 : ${tgl}\n` +
+                    `📦 : ${jumlah} Pcs\n` +
                     `📝 : ${ket}`;
         }
 // Menambahkan Note Driver di baris paling bawah untuk semua layanan
-pesan += `%0A%0A> Note Driver:%0A` +
-         `- Ini dipesan Via Elfathan-Travel.web.id%0A` +
+isipesan += `\n\n> Note Driver:\n` +
+         `- Ini dipesan Via Elfathan-Travel.web.id%\n` +
          `- Chat 085 330000 882 yg bisa Kondisikan`;
         
 try {
@@ -656,13 +656,14 @@ const data = {
     const kode = result.kode;
 
     // ✅ TAMBAHKAN KODE BOOKING KE PESAN WA
-    pesan = `Halo *Elfathan Travel* 👋%0A` +
-            `📌 *Kode Booking:* ${kode}%0A%0A` + pesan;
+    const pesan = `Halo *Elfathan Travel* 👋\n` +
+            `📌 *Kode Booking:* ${kode}\n\n` + isipesan;
 
     // ✅ BARU BUKA WHATSAPP
-setTimeout(() => {
-            window.open(`https://wa.me/6285330000882?text=${encodeURIComponent(pesan)}`, "_blank");
-
+        window.open(
+            `https://wa.me/6285330000882?text=${encodeURIComponent(pesan)}`,
+            "_blank"
+        );
 } catch (err) {
     alert("Gagal kirim data ke server!");
     console.error(err);
@@ -678,7 +679,6 @@ setTimeout(() => {
             if(inputTgl) inputTgl.type = "text"; 
             
             updateForm(); // reset juga placeholder & field
-        }, 800);
     });
 });
 </script>
