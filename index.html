@@ -530,6 +530,7 @@ class="fixed bottom-12 right-6 bg-green-500 hover:bg-green-600 text-white p-4 ro
 
 <script>
 document.addEventListener("DOMContentLoaded", function(){
+    const API_URL = "https://script.google.com/macros/s/AKfycbwYd6qdmtU8CS3tH0C1aONqzSSs101oNkKgakblc7xz5LlkcWGUjcDQLpot06qRpeVV/exec";
     const form = document.getElementById("bookingForm");
     const layanan = document.getElementById("selectLayanan");
     const jumlahInput = document.getElementById("inputJumlah");
@@ -582,13 +583,13 @@ layanan.addEventListener("change", updateForm);
 // 🔥 trigger saat pertama load
 updateForm();    
     // Handle Submit
-    form.addEventListener("submit", function(e){
+    form.addEventListener("submit", async function(e){
         e.preventDefault();
 
         // Ubah tombol jadi loading
         const btnSubmit = form.querySelector('button[type="submit"]');
         const originalText = btnSubmit.innerHTML;
-        btnSubmit.innerHTML = "Membuka WhatsApp... ⏳";
+        btnSubmit.innerHTML = "Menyimpan & Membuka WA... ⏳";
         btnSubmit.classList.add("opacity-75", "cursor-not-allowed");
 
         let tgl = document.getElementById("inputTanggal").value;
@@ -612,14 +613,14 @@ updateForm();
         let pesan = "";
 
         if (layanan.value === "penumpang") {
-            pesan = `Halo *Elfathan Travel* 👋%0A%0ASaya ingin pesan Tiket *Penumpang*:%0A%0A` +
+            pesan = `Saya ingin pesan Tiket *Penumpang*:%0A%0A` +
                     `👤 : ${nama}%0A` +
                     `📍 : ${rute}%0A` +
                     `📅 : ${tgl}%0A` +
                     `💺 : ${jumlah} Orang%0A` +
                     `📝 : ${ket}`;
         } else if (layanan.value === "barang") {
-            pesan = `Halo *Elfathan Travel* 👋%0A%0ASaya ingin menggunakan layanan *Kirim Barang*:%0A%0A` +
+            pesan = `Saya ingin menggunakan layanan *Kirim Barang*:%0A%0A` +
                     `👤📤 (*Pengirim*)	: ${nama}%0A` +
                     `👤📥 (*Penerima*)	: ${nPenerima}%0A` +
                     `📱📥 (*Penerima*)	: ${noHpPenerima}%0A` +
@@ -633,8 +634,40 @@ pesan += `%0A%0A> Note Driver:%0A` +
          `- Ini dipesan Via Elfathan-Travel.web.id%0A` +
          `- Chat 085 330000 882 yg bisa Kondisikan`;
         
-        setTimeout(() => {
-            window.open(`https://wa.me/6285330000882?text=${pesan}`, "_blank");
+try {
+
+const data = {
+    nama: nama,
+    rute: rute,
+    layanan: layanan.value,
+    jumlah: jumlah,
+    keterangan: ket,
+    namaPenerima: document.getElementById("inputNamaPenerima")?.value || "-",
+    noPenerima: document.getElementById("inputNoPenerima")?.value || "-"
+};
+
+    // ✅ SIMPAN KE GOOGLE SHEET
+    const res = await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+    const kode = result.kode;
+
+    // ✅ TAMBAHKAN KODE BOOKING KE PESAN WA
+    pesan = `Halo *Elfathan Travel* 👋%0A` +
+            `📌 *Kode Booking:* ${kode}%0A%0A` + pesan;
+
+    // ✅ BARU BUKA WHATSAPP
+setTimeout(() => {
+            window.open(`https://wa.me/6285330000882?text=${encodeURIComponent(pesan)}`, "_blank");
+
+} catch (err) {
+    alert("Gagal kirim data ke server!");
+    console.error(err);
+}
+
             // Kembalikan tombol seperti semula setelah 0.8 detik
             btnSubmit.innerHTML = originalText;
             btnSubmit.classList.remove("opacity-75", "cursor-not-allowed");
