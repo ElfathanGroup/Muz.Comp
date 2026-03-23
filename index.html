@@ -100,7 +100,7 @@
                     <a href="#rute" class="hover:text-rose-600 transition">RUTE</a>
                     <a href="#keunggulan" class="hover:text-brand-red transition">KEUNGGULAN</a>
                     <a href="#about" class="hover:text-rose-600 transition">TENTANG</a>
-                    <a href="#foto" class="hover:text-rose-600 transition">GALERI</a>
+                    <a href="#foto" class="hover:text-rose-600 transition">GALERI1</a>
                     <a href="#layanan" class="hover:text-rose-600 transition">LAYANAN</a>
                     <a href="#booking" class="text-white bg-rose-600 hover:bg-rose-700 px-6 py-2 rounded-full text-[10px] font-black transition-transform hover:scale-105 shadow-[0_0_15px_rgba(225,29,72,0.4)] ml-4">PESAN SEKARANG</a>
                 </div>
@@ -531,6 +531,17 @@ class="fixed bottom-12 right-6 bg-green-500 hover:bg-green-600 text-white p-4 ro
 <script>
 document.addEventListener("DOMContentLoaded", function(){
     const API_URL = "https://script.google.com/macros/s/AKfycbwYd6qdmtU8CS3tH0C1aONqzSSs101oNkKgakblc7xz5LlkcWGUjcDQLpot06qRpeVV/exec";
+    const now = new Date();
+    // Tanggal booking ikut jam dan menit
+    const tanggalBooking = 
+  now.getFullYear() + '.' +
+  String(now.getMonth() + 1).padStart(2, '0') + '.' +
+  String(now.getDate()).padStart(2, '0') + '-' +
+  String(now.getHours()).padStart(2, '0') + ':' +
+  String(now.getMinutes()).padStart(2, '0');
+
+console.log(tanggalBooking); // contoh: 2026.03.23-14:32
+    
     const form = document.getElementById("bookingForm");
     const layanan = document.getElementById("selectLayanan");
     const jumlahInput = document.getElementById("inputJumlah");
@@ -632,7 +643,9 @@ updateForm();
 // Menambahkan Note Driver di baris paling bawah untuk semua layanan
 isipesan += `\n\n> Note Driver:\n` +
          `- Ini dipesan Via Elfathan-Travel.web.id\n` +
-         `- Chat 085 330000 882 yg bisa Kondisikan`;
+         `- Chat 085 330000 882 yg bisa Kondisikan\n\n` +
+            `📌 *Kode Booking*    : ${kode}\n` +
+        `*Tanggal*                        : ${tanggalBooking}`;
         
 try {
 
@@ -656,8 +669,7 @@ const data = {
     const kode = result.kode;
 
     // ✅ TAMBAHKAN KODE BOOKING KE PESAN WA
-    const pesan = `Halo *Elfathan Travel* 👋\n` +
-            `📌 *Kode Booking:* ${kode}\n\n` + isipesan;
+    const pesan = `Halo *Elfathan Travel* 👋\n` + isipesan;
 
     // ✅ BARU BUKA WHATSAPP
         window.open(
