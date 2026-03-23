@@ -668,24 +668,28 @@ isipesan += `\n\n\n> *Note Driver*:\n` +
          `- Official Booking: *Elfathan-Travel.web.id*\n` +
          `- Chat *085 330000 882* yang bisa kondisikan\n` +
                         `━━━━━━━━━━━━━━━━━━━━\n` +
-                        `> *Kode Booking* : ${kode}\n` +
-                        `> *Tanggal*     	 : ${tglnow}`;
+                        `> *Kode Booking*	: ${kode}\n` +
+                        `> *Tanggal*						: ${tglnow}`;
         
 
 
     const pesan = `Halo *Elfathan Travel* 👋\n` + isipesan;
 
     // ✅ BARU BUKA WHATSAPP
-        const urlApp = "whatsapp://send?phone=6285330000882&text=" + encodeURIComponent(pesan);
-const urlWeb = "https://wa.me/6285330000882?text=" + encodeURIComponent(pesan);
+const text = encodeURIComponent(pesan);
 
-// coba buka app dulu
+const urlApp = "whatsapp://send?phone=6285330000882&text=" + text;
+const urlWeb = "https://wa.me/6285330000882?text=" + text;
+
+// coba buka WA app
 window.location.href = urlApp;
 
-// fallback ke web kalau gagal
+// fallback (kalau tidak pindah app)
 setTimeout(() => {
-  window.open(urlWeb, "_blank");
-}, 1500);
+  if (!document.hidden) {
+    window.open(urlWeb, "_blank");
+  }
+}, 800);
 
 
 // 8. Reset Form
