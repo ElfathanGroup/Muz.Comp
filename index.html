@@ -100,7 +100,7 @@
                     <a href="#rute" class="hover:text-rose-600 transition">RUTE</a>
                     <a href="#keunggulan" class="hover:text-brand-red transition">KEUNGGULAN</a>
                     <a href="#about" class="hover:text-rose-600 transition">TENTANG</a>
-                    <a href="#foto" class="hover:text-rose-600 transition">GALERI1111</a>
+                    <a href="#foto" class="hover:text-rose-600 transition">GALERI</a>
                     <a href="#layanan" class="hover:text-rose-600 transition">LAYANAN</a>
                     <a href="#booking" class="text-white bg-rose-600 hover:bg-rose-700 px-6 py-2 rounded-full text-[10px] font-black transition-transform hover:scale-105 shadow-[0_0_15px_rgba(225,29,72,0.4)] ml-4">PESAN SEKARANG</a>
                 </div>
@@ -592,12 +592,14 @@ updateForm();
         btnSubmit.innerHTML = "Menyimpan & Membuka WA... ⏳";
         btnSubmit.classList.add("opacity-75", "cursor-not-allowed");
 
-        let tgl = document.getElementById("inputTanggal").value;
-        // Format tanggal jika diperlukan
-        if(tgl.includes("-")) {
-            const [y, m, d] = tgl.split("-");
-            tgl = `${d}/${m}/${y}`;
-        }
+try {
+            // 1. Ambil & Format Tanggal
+            let tgl = document.getElementById("inputTanggal").value;
+            if(tgl.includes("-")) {
+                const [y, m, d] = tgl.split("-");
+                tgl = `${d}/${m}/${y}`;
+            }
+
 
         // PERBAIKAN 2: Ambil semua nilai (termasuk isian kosong/-) SAAT tombol di-klik
         const nama = document.getElementById("inputNama").value;
@@ -609,7 +611,29 @@ updateForm();
         const nPenerima = document.getElementById("inputNamaPenerima").value;
         const noHpPenerima = document.getElementById("inputNoPenerima").value;
 
-        // Ambil waktu sekarang untuk tglnow
+// 3. Susun Data untuk API
+const data = {
+    nama: nama,
+    rute: rute,
+    layanan: layanan.value,
+    jumlah: jumlah,
+    keterangan: ket,
+    namaPenerima: document.getElementById("inputNamaPenerima")?.value || "-",
+    noPenerima: document.getElementById("inputNoPenerima")?.value || "-"
+};
+
+    
+    // ✅ SIMPAN KE GOOGLE SHEET
+    const res = await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+    const kode = result.kode;
+
+        
+        // 5. Susun Waktu Saat Ini
         const now2 = new Date();
         const day = String(now2.getDate()).padStart(2,'0');
         const month = String(now2.getMonth()+1).padStart(2,'0');
@@ -619,7 +643,7 @@ updateForm();
         const tglnow = `${day}.${month}.${year}_${hours}:${minutes}`;
         
 
-        // PERBAIKAN 3: Logika pemisah format pesan WA
+       // 6. Siapkan Pesan WA Sesuai Layanan
         let isipesan = "";
 
         if (layanan.value === "penumpang") {
@@ -646,28 +670,8 @@ isipesan += `\n\n> Note Driver:\n` +
                         `> *Kode Booking* : ${kode}\n` +
                         `> *Tanggal*      : ${tglnow}`;
         
-try {
 
-const data = {
-    nama: nama,
-    rute: rute,
-    layanan: layanan.value,
-    jumlah: jumlah,
-    keterangan: ket,
-    namaPenerima: document.getElementById("inputNamaPenerima")?.value || "-",
-    noPenerima: document.getElementById("inputNoPenerima")?.value || "-"
-};
 
-    // ✅ SIMPAN KE GOOGLE SHEET
-    const res = await fetch(API_URL, {
-        method: "POST",
-        body: JSON.stringify(data)
-    });
-
-    const result = await res.json();
-    const kode = result.kode;
-
-    // ✅ TAMBAHKAN KODE BOOKING KE PESAN WA
     const pesan = `Halo *Elfathan Travel* 👋\n\n` + isipesan;
 
     // ✅ BARU BUKA WHATSAPP
@@ -675,23 +679,27 @@ const data = {
             `https://wa.me/6285330000882?text=${encodeURIComponent(pesan)}`,
             "_blank"
         );
+
+
+// 8. Reset Form
+            form.reset(); 
+            let inputTgl = document.getElementById("inputTanggal");
+            if(inputTgl) inputTgl.type = "text"; 
+            updateForm();
+    
 } catch (err) {
     alert("Gagal kirim data ke server!");
     console.error(err);
-}
-
-            // Kembalikan tombol seperti semula setelah 0.8 detik
+} finally {
+            // 9. Kembalikan Tombol (Tetap dieksekusi meskipun gagal/sukses)
             btnSubmit.innerHTML = originalText;
             btnSubmit.classList.remove("opacity-75", "cursor-not-allowed");
-            form.reset(); // Mengosongkan isian form setelah submit
-            
-            // 👇 TAMBAHAN UNTUK MEMUNCULKAN PLACEHOLDER TANGGAL KEMBALI 👇
-            let inputTgl = document.getElementById("inputTanggal");
-            if(inputTgl) inputTgl.type = "text"; 
-            
-            updateForm(); // reset juga placeholder & field
+        }
     });
 });
+
+
+    
 </script>
 
 <script>
