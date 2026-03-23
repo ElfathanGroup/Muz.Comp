@@ -613,14 +613,16 @@ updateForm();
         let isipesan = "";
 
         if (layanan.value === "penumpang") {
-            isipesan = `Saya ingin pesan Tiket *Penumpang*:\n\n` +
+            isipesan = `Halo *Elfathan Travel* 👋\n` +
+               `Saya ingin pesan Tiket *Penumpang*:\n\n` +
                     `👤 : ${nama}\n` +
                     `📍 : ${rute}\n` +
                     `📅 : ${tgl}\n` +
                     `💺 : ${jumlah} Orang\n` +
                     `📝 : ${ket}`;
         } else if (layanan.value === "barang") {
-            isipesan = `Saya ingin menggunakan layanan *Kirim Barang*:\n\n` +
+            isipesan = `Halo *Elfathan Travel* 👋\n` +
+               `Saya ingin menggunakan layanan *Kirim Barang*:\n\n` +
                     `👤📤 (*Pengirim*)	: ${nama}\n` +
                     `👤📥 (*Penerima*)	: ${nPenerima}\n` +
                     `📱📥 (*Penerima*)	: ${noHpPenerima}\n` +
@@ -632,7 +634,9 @@ updateForm();
 // Menambahkan Note Driver di baris paling bawah untuk semua layanan
 isipesan += `\n\n> Note Driver:\n` +
          `- Ini dipesan Via Elfathan-Travel.web.id\n` +
-         `- Chat 085 330000 882 yg bisa Kondisikan`;
+         `- Chat 085 330000 882 yg bisa Kondisikan\n\n` +
+               `Kode Booking\t: ${kode}\n` +
+               `Tanggal\t\t: ${tglNow}`;
         
 try {
 
@@ -654,10 +658,6 @@ const data = {
 
     const result = await res.json();
     const kode = result.kode;
-
-    // ✅ TAMBAHKAN KODE BOOKING KE PESAN WA
-    const pesan = `Halo *Elfathan Travel* 👋\n` +
-            `📌 *Kode Booking:* ${kode}\n\n` + isipesan;
 
     // ✅ BARU BUKA WHATSAPP
         window.open(
