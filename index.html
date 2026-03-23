@@ -100,7 +100,7 @@
                     <a href="#rute" class="hover:text-rose-600 transition">RUTE</a>
                     <a href="#keunggulan" class="hover:text-brand-red transition">KEUNGGULAN</a>
                     <a href="#about" class="hover:text-rose-600 transition">TENTANG</a>
-                    <a href="#foto" class="hover:text-rose-600 transition">GALERI</a>
+                    <a href="#foto" class="hover:text-rose-600 transition">GALERI1111</a>
                     <a href="#layanan" class="hover:text-rose-600 transition">LAYANAN</a>
                     <a href="#booking" class="text-white bg-rose-600 hover:bg-rose-700 px-6 py-2 rounded-full text-[10px] font-black transition-transform hover:scale-105 shadow-[0_0_15px_rgba(225,29,72,0.4)] ml-4">PESAN SEKARANG</a>
                 </div>
@@ -609,6 +609,16 @@ updateForm();
         const nPenerima = document.getElementById("inputNamaPenerima").value;
         const noHpPenerima = document.getElementById("inputNoPenerima").value;
 
+        // Ambil waktu sekarang untuk tglnow
+        const now2 = new Date();
+        const day = String(now2.getDate()).padStart(2,'0');
+        const month = String(now2.getMonth()+1).padStart(2,'0');
+        const year = now2.getFullYear();
+        const hours = String(now2.getHours()).padStart(2,'0');
+        const minutes = String(now2.getMinutes()).padStart(2,'0');
+        const tglnow = `${day}.${month}.${year}_${hours}:${minutes}`;
+        
+
         // PERBAIKAN 3: Logika pemisah format pesan WA
         let isipesan = "";
 
@@ -632,7 +642,9 @@ updateForm();
 // Menambahkan Note Driver di baris paling bawah untuk semua layanan
 isipesan += `\n\n> Note Driver:\n` +
          `- Ini dipesan Via Elfathan-Travel.web.id\n` +
-         `- Chat 085 330000 882 yg bisa Kondisikan`;
+         `- Chat 085 330000 882 yg bisa Kondisikan\n\n` +
+                        `> *Kode Booking* : ${kode}\n` +
+                        `> *Tanggal*      : ${tglnow}`;
         
 try {
 
@@ -656,8 +668,7 @@ const data = {
     const kode = result.kode;
 
     // ✅ TAMBAHKAN KODE BOOKING KE PESAN WA
-    const pesan = `Halo *Elfathan Travel* 👋\n` +
-            `📌 *Kode Booking:* ${kode}\n\n` + isipesan;
+    const pesan = `Halo *Elfathan Travel* 👋\n\n` + isipesan;
 
     // ✅ BARU BUKA WHATSAPP
         window.open(
