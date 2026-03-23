@@ -664,15 +664,16 @@ const data = {
                     `📝 : ${ket}`;
         }
 // Menambahkan Note Driver di baris paling bawah untuk semua layanan
-isipesan += `\n\n> Note Driver:\n` +
+isipesan += `\n\n👉Note Driver:\n` +
          `- Ini dipesan Via Elfathan-Travel.web.id\n` +
          `- Chat 085 330000 882 yg bisa Kondisikan\n\n` +
+                        `==========================` +
                         `> *Kode Booking* : ${kode}\n` +
-                        `> *Tanggal*      : ${tglnow}`;
+                        `> *Tanggal*       : ${tglnow}`;
         
 
 
-    const pesan = `Halo *Elfathan Travel* 👋\n\n` + isipesan;
+    const pesan = `Halo *Elfathan Travel* 👋\n` + isipesan;
 
     // ✅ BARU BUKA WHATSAPP
         window.open(
