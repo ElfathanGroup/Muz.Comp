@@ -606,10 +606,18 @@ try {
         const rute = document.getElementById("inputRute").value;
         const jumlah = jumlahInput.value;
         const ket = keteranganInput.value || "-"; 
-        
+
+function formatNoHP(nomor) {
+  let angka = nomor.replace(/\D/g, "");
+  let bagian = angka.match(/.{1,4}/g);
+  return bagian ? bagian.join("-") : "";
+}
+
+
+    
         // Ambil nilai inputan penerima
         const nPenerima = document.getElementById("inputNamaPenerima").value;
-        const noHpPenerima = document.getElementById("inputNoPenerima").value;
+        const noHpPenerima = formatNoHP(document.getElementById("inputNoPenerima").value);
 
 // 3. Susun Data untuk API
 const data = {
@@ -684,12 +692,12 @@ const urlWeb = "https://wa.me/6285330000882?text=" + text;
 // coba buka WA app
 window.location.href = urlApp;
 
-// fallback (kalau tidak pindah app)
+// fallback ke web TANPA buka tab baru
 setTimeout(() => {
   if (!document.hidden) {
-    window.open(urlWeb, "_blank");
+    window.location.href = urlWeb;
   }
-}, 800);
+}, 500);
 
 
 // 8. Reset Form
